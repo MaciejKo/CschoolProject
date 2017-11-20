@@ -1,15 +1,11 @@
-package core;
+package core.operation;
 
-import core.*;
 import core.human.Parent;
-import core.operation.Display;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Input {
-
-    private Display display = new Display();
 
     public String getInput(){
         //pobieranie danych od uzytkownika
@@ -34,12 +30,15 @@ public class Input {
         //do sprawdzenia odpowiedzi na pytania, czy dodajemy kolejnego czlowieka
         //mozna tu dodac displaya - jezli cos jest zle, to wysiwtl komunikat
         //jezeli odpowiedz jest dobra, to zwraca true
-        if(input.equals("Tak"))
+        Display display = new Display();
+        if(input.equals("TAK"))
             return true;
-        else if(input.equals("Nie"))
+        else if(input.equals("NIE"))
             return true;
-        else
-            return false;
+        else {
+            display.showErrorMessage();
+            return true;
+        }
     }
 
     public boolean verifyIsNumber(String input){
@@ -53,17 +52,43 @@ public class Input {
             return true;
     }
 
-    public boolean verifyNumber(String input, ArrayList<Parent> parentList){
+    public boolean verifyNumber(String input, List<Parent> parents){
         //jeżeli ktos poda liczbe wieksza, niz jest do wyboru rodzicow, to zwraca true (czyli liczba jest za duza)
         //mozna tu dodac displaya - jezli cos jest zle, to wysiwtl komunikat
         Integer i=Integer.valueOf(input);
 
-        if(i>parentList.size())
+        if(i>parents.size())
             return true;
         else
             return false;
 
 
+    }
+
+    public boolean veryfiParentData(String input, List<Parent> parents){
+
+        Display display=new Display();
+
+        if(verifyIsEmpty(input)) {
+            display.showErrorEmptyMessage();
+            display.showLinkPupilWithParentMessage();
+            display.displayParentList(parents);
+            return true;
+        }
+        else if(verifyIsNumber(input)){
+            display.showErrorNotANumber();
+            display.showLinkPupilWithParentMessage();
+            display.displayParentList(parents);
+            return true;
+        }
+        else if(verifyNumber(input, parents)){
+            display.showErrorOutOFListMessage();
+            display.showLinkPupilWithParentMessage();
+            display.displayParentList(parents);
+            return true;
+        }
+        else
+            return false;
     }
 }
 

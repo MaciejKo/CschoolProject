@@ -1,6 +1,11 @@
 package core.operation;
 
+import core.human.Parent;
+
+import java.util.List;
+
 public class Display {
+
     public void showEnterMessage(){
         System.out.println("Witam w aplikacji Szkoła!");
     }
@@ -9,6 +14,9 @@ public class Display {
     }
     public void showNewPupil(){
         System.out.println("Podaj uczniów: ");
+    }
+    public void showPupilsCounter(int counter){
+        System.out.println("Uczen "+ counter + " z 3");
     }
     public void showNewParent(){
         System.out.println("Podaj rodziców: ");
@@ -29,7 +37,7 @@ public class Display {
         System.out.println("Podaj klasę: ");
     }
     public void showLinkPupilWithParentMessage(){
-        System.out.println("Przypisz ucznia podając numer: ");
+        System.out.println("Przypisz rodzica podając numer z listy: ");
     }
     public void showResultMessage(){
         System.out.println("Rezultat: ");
@@ -48,6 +56,21 @@ public class Display {
     }
     public void showErrorOutOFListMessage(){
         System.out.println("Sorry, podałeś indeks spoza listy. ");
+    }
+    public void showErrorEmptyMessage(){
+            System.out.println("Podana wartość jest pusta.");
+    }
+    public void showErrorNotANumber(){
+    System.out.println("Podana wartość nie jest liczbą.");
+}
+    public void displayParentList(List<Parent> parents){
+        for(Parent par:parents){
+            System.out.println((parents.indexOf(par)+1) + ". "+ par.getFirstName() + " " + par.getLastName());
+        }
+    }
+
+    public void showErrorEmptyParentList(){
+        System.out.println("Lista rodziców jest pusta!");
     }
 
 }
