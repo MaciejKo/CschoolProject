@@ -1,6 +1,7 @@
 package core.operation;
 
 import core.human.Parent;
+import core.human.Teacher;
 
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class Display {
     }
     public void showNewParent(int count){
         System.out.println("Podaj rodziców: (" + (count+1) + "/3)");
+    }
+
+    public void showTeachersCounter(int counter) {
+        System.out.println("Nauczyciel " + counter + "/3");
     }
     public void showNewParent(){
         System.out.println("Podaj rodziców: ");
@@ -79,4 +84,9 @@ public class Display {
         System.out.println(number + "." + Nazwisko);
     }
 
+    public void showTeacherlist(List<Teacher> teacherList) {
+        for (Teacher teacher : teacherList) {
+            System.out.println(teacher.getFirstName() + " " + teacher.getLastName() + " " + teacher.getSubject());
+        }
+    }
 }
