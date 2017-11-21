@@ -7,6 +7,19 @@ import java.util.Scanner;
 
 public class Input {
 
+    private Scanner scanner;
+
+    public Input() {
+        scanner = new Scanner(System.in);
+    }
+
+    public String readString(){
+        return scanner.nextLine();
+    }
+    public int readNumber(){
+        return scanner.nextInt();
+    }
+
     public String getInput(){
         //pobieranie danych od uzytkownika
         Scanner in = new Scanner(System.in);
@@ -90,6 +103,22 @@ public class Input {
         else
             return false;
     }
+
+    public boolean isNumeric(String str)
+    {
+        try
+        {
+            int i = Integer.parseInt(str);
+        }
+        catch(NumberFormatException nfe)
+        {
+            System.out.println("Przyjmuję tylko liczby całkowite!");
+            return false;
+        }
+        return true;
+    }
+
+
 }
 
 

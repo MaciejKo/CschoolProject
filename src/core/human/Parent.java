@@ -6,4 +6,16 @@ public class Parent extends Human {
         super(firstName, lastName);
         this.profession = profession;
     }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public Parent() {
+    }
+
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
+
 }

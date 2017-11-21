@@ -4,6 +4,10 @@ public class Human {
 private String firstName;
 private String lastName;
 
+public Human(){
+
+}
+
     public Human(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;

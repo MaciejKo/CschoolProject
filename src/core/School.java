@@ -12,12 +12,13 @@ public class School {
     List<Teacher> teacherList = new ArrayList<>();
     List<Parent> parentList = new ArrayList<>();
     List<Student> studentList = new ArrayList<>();
+    Display display = new Display();
+    Input input = new Input();
 
     public void mainMethod() {
 
-        List<Parent> parents = new ArrayList<Parent>();
-
-        addStudent(parents);
+        addAllParents();
+        addStudent(parentList);
     }
 
     private void addTeacher() {
@@ -26,10 +27,7 @@ public class School {
 
     private List<Student> addStudent(List<Parent> parents){
         List<Student> students = new ArrayList<>();
-        Display display = new Display();
         if(!parents.isEmpty()) {
-
-            Input input = new Input();
 
             display.showNewPupil();
 
@@ -106,6 +104,69 @@ public class School {
         Student student = new Student(firstName, lastName, studentClass, (Integer.valueOf(parentNumber)-1));
 
         return student;
+    }
+
+    private void addParent(){
+        Parent rodzic = new Parent();
+        String userInput = "";
+        Display display = new Display();
+        Input input = new Input();
+
+        display.showNewParent(parentList.size());
+
+        // podaj imię
+        while(userInput.isEmpty()){
+            display.showFirstnameMessage();
+            userInput = input.readString();
+        }
+        rodzic.setFirstName(userInput);
+        userInput = "";
+
+        // podaj nazwisko
+        while(userInput.isEmpty()){
+            display.showLastnameMessage();
+            userInput = input.readString();
+        }
+        rodzic.setLastName(userInput);
+        userInput = "";
+
+        // podaj zawód
+        while(userInput.isEmpty()){
+            display.showProfessionMessage();
+            userInput = input.readString();
+        }
+        rodzic.setProfession(userInput);
+
+        parentList.add(rodzic);
+    }
+
+    public void addAllParents(){
+        boolean isAnotherParentRequired = true;
+
+        while (parentList.size()<3){
+            addParent();
+        }
+
+        while(isAnotherParentRequired) {
+
+            display.showNewParentMessage();
+
+            while(true) {
+                String userInput = input.readString();
+
+                if(userInput.equalsIgnoreCase("TAK")){
+                    addParent();
+                    break;
+                }
+                else if(userInput.equalsIgnoreCase("NIE")) {
+                    isAnotherParentRequired = false;
+                    break;
+                }
+                else {
+                    display.showErrorMessage();
+                }
+            }
+        }
     }
 
 }

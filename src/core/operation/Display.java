@@ -18,6 +18,9 @@ public class Display {
     public void showPupilsCounter(int counter){
         System.out.println("Uczen "+ counter + " z 3");
     }
+    public void showNewParent(int count){
+        System.out.println("Podaj rodziców: (" + (count+1) + "/3)");
+    }
     public void showNewParent(){
         System.out.println("Podaj rodziców: ");
     }
@@ -49,7 +52,7 @@ public class Display {
         System.out.println("Czy chcesz wprowadzić kolejnego ucznia? (TAK/NIE) ");
     }
     public void showNewParentMessage(){
-        System.out.println("Czy chcesz wprowadzić kolejnego nauczyciela? (TAK/NIE) ");
+        System.out.println("Czy chcesz wprowadzić kolejnego rodzica? (TAK/NIE) ");
     }
     public void showErrorMessage(){
         System.out.println("Sorry, przyjmuję tylko TAK lub NIE. ");
@@ -71,6 +74,9 @@ public class Display {
 
     public void showErrorEmptyParentList(){
         System.out.println("Lista rodziców jest pusta!");
+    }
+    public void showParent(int number, String Nazwisko){
+        System.out.println(number + "." + Nazwisko);
     }
 
 }
