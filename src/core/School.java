@@ -63,7 +63,7 @@ public class School {
 
 
     private List<Student> addStudent(List<Parent> parents){
-        List<Student> students = new ArrayList<>();
+
         if(!parents.isEmpty()) {
 
             display.showNewPupil();
@@ -71,36 +71,21 @@ public class School {
             //dodawanie trzech wymaganych uczniów
             for (int i = 0; i < 3; i++) {
                 display.showPupilsCounter((i + 1));
-                students.add(getStudentData(display, input, parents));
+                studentList.add(getStudentData(display, input, parents));
             }
 
             //pytanie o kolejnych uczniow
             display.showNewPupilMessage();
-            String answer = input.getInput();
-            boolean next = true;
-            while (next) {
-                if (answer.equals("NIE")) {
-                    next = false;
-                } else if (answer.equals("TAK")) {
-                    //dodawanie kolejnego ucznia
-                    students.add(getStudentData(display, input, parents));
-                    //pytanie, czy dodajemy nastepnego
-                    display.showNewPupilMessage();
-                    answer = input.getInput();
-                    next = true;
-                } else {
-                    //jezeli bedzie inna odpowiedz niz wymagana
-                    display.showErrorMessage();
-                    display.showNewPupilMessage();
-                    answer = input.getInput();
-                    next = true;
-                }
+
+            while(input.verifyAnswer()){
+                studentList.add((getStudentData(display, input, parents)));
+                display.showNewPupilMessage();
             }
         }
         else
             display.showErrorEmptyParentList();
 
-        return students;
+        return studentList;
     }
 
     private Student getStudentData(Display display, Input input, List<Parent> parents){

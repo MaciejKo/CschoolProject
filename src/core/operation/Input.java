@@ -56,6 +56,22 @@ public class Input {
             }
         }
     }
+
+    /*
+    public boolean verifyStudentAnswer(String answer){
+        Display display = new Display();
+        Input input=new Input();
+        if (answer.equalsIgnoreCase("TAK"))
+            return true;
+        else if (answer.equalsIgnoreCase("NIE"))
+            return false;
+        else {
+            display.showErrorMessage();
+            answer=input.getInput();
+            verifyStudentAnswer(answer);
+        }
+    }
+*/
     public boolean verifyIsNumber(String input){
         //do sprawdzenia tego, co poda uzytkownik przy wyborze rodzica
         //mozna tu dodac displaya - jezli cos jest zle, to wysiwtl komunikat
