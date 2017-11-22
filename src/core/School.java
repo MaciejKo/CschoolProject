@@ -47,24 +47,27 @@ public class School {
     private void addAllTeachers() {
         boolean iterate = true;
         display.showNewTeacher();
+
         while (iterate) {
-            addTeacher();
-            display.showTeachersCounter(teacherList.size());
+            for (int i = 0; i < 3; i++) {
+                display.showTeachersCounter(i + 1);
+                addTeacher();
+            }
             display.showNewTeacherMessage(); //"Czy chcesz wprowadzić kolejnego nauczyciela? (TAK/NIE) "
             //weryfikuje tak czy nie
-
             if (!input.verifyAnswer()) {   //! = not
                 iterate = false;
             }
+
+
         }
         display.showTeacherlist(teacherList);
     }
 
 
+    private List<Student> addStudent(List<Parent> parents) {
 
-    private List<Student> addStudent(List<Parent> parents){
-
-        if(!parents.isEmpty()) {
+        if (!parents.isEmpty()) {
 
             display.showNewPupil();
 
@@ -77,58 +80,57 @@ public class School {
             //pytanie o kolejnych uczniow
             display.showNewPupilMessage();
 
-            while(input.verifyAnswer()){
+            while (input.verifyAnswer()) {
                 studentList.add((getStudentData(display, input, parents)));
                 display.showNewPupilMessage();
             }
-        }
-        else
+        } else
             display.showErrorEmptyParentList();
 
         return studentList;
     }
 
-    private Student getStudentData(Display display, Input input, List<Parent> parents){
+    private Student getStudentData(Display display, Input input, List<Parent> parents) {
 
-        String firstName=new String();
-        String lastName=new String();
-        String studentClass=new String();
-        String parentNumber=new String();
+        String firstName = new String();
+        String lastName = new String();
+        String studentClass = new String();
+        String parentNumber = new String();
 
         display.showFirstnameMessage();
         firstName = input.getInput();
-        while(input.verifyIsEmpty(firstName)) {
+        while (input.verifyIsEmpty(firstName)) {
             display.showFirstnameMessage();
-            firstName=input.getInput();
+            firstName = input.getInput();
         }
 
         display.showLastnameMessage();
-        lastName=input.getInput();
-        while(input.verifyIsEmpty(lastName)){
+        lastName = input.getInput();
+        while (input.verifyIsEmpty(lastName)) {
             display.showLastnameMessage();
-            lastName=input.getInput();
+            lastName = input.getInput();
         }
 
         display.showPupilClassMessage();
-        studentClass=input.getInput();
-        while(input.verifyIsEmpty(studentClass)){
+        studentClass = input.getInput();
+        while (input.verifyIsEmpty(studentClass)) {
             display.showPupilClassMessage();
-            studentClass=input.getInput();
+            studentClass = input.getInput();
         }
 
         display.showLinkPupilWithParentMessage();
         display.displayParentList(parents);
-        parentNumber=input.getInput();
-        while(input.veryfiParentData(parentNumber, parents)){
-            parentNumber=input.getInput();
+        parentNumber = input.getInput();
+        while (input.veryfiParentData(parentNumber, parents)) {
+            parentNumber = input.getInput();
         }
 
-        Student student = new Student(firstName, lastName, studentClass, (Integer.valueOf(parentNumber)-1));
+        Student student = new Student(firstName, lastName, studentClass, (Integer.valueOf(parentNumber) - 1));
 
         return student;
     }
 
-    private void addParent(){
+    private void addParent() {
         Parent rodzic = new Parent();
         String userInput = "";
         Display display = new Display();
@@ -137,7 +139,7 @@ public class School {
         display.showNewParent(parentList.size());
 
         // podaj imię
-        while(userInput.isEmpty()){
+        while (userInput.isEmpty()) {
             display.showFirstnameMessage();
             userInput = input.readString();
         }
@@ -145,7 +147,7 @@ public class School {
         userInput = "";
 
         // podaj nazwisko
-        while(userInput.isEmpty()){
+        while (userInput.isEmpty()) {
             display.showLastnameMessage();
             userInput = input.readString();
         }
@@ -153,7 +155,7 @@ public class School {
         userInput = "";
 
         // podaj zawód
-        while(userInput.isEmpty()){
+        while (userInput.isEmpty()) {
             display.showProfessionMessage();
             userInput = input.readString();
         }
@@ -162,29 +164,27 @@ public class School {
         parentList.add(rodzic);
     }
 
-    public void addAllParents(){
+    public void addAllParents() {
         boolean isAnotherParentRequired = true;
 
-        while (parentList.size()<3){
+        while (parentList.size() < 3) {
             addParent();
         }
 
-        while(isAnotherParentRequired) {
+        while (isAnotherParentRequired) {
 
             display.showNewParentMessage();
 
-            while(true) {
+            while (true) {
                 String userInput = input.readString();
 
-                if(userInput.equalsIgnoreCase("TAK")){
+                if (userInput.equalsIgnoreCase("TAK")) {
                     addParent();
                     break;
-                }
-                else if(userInput.equalsIgnoreCase("NIE")) {
+                } else if (userInput.equalsIgnoreCase("NIE")) {
                     isAnotherParentRequired = false;
                     break;
-                }
-                else {
+                } else {
                     display.showErrorMessage();
                 }
             }
