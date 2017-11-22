@@ -39,21 +39,23 @@ public class Input {
             return false;
     }
 
-    public boolean verifyAnswer(String input){
+    public boolean verifyAnswer() {
         //do sprawdzenia odpowiedzi na pytania, czy dodajemy kolejnego czlowieka
         //mozna tu dodac displaya - jezli cos jest zle, to wysiwtl komunikat
         //jezeli odpowiedz jest dobra, to zwraca true
         Display display = new Display();
-        if(input.equals("TAK"))
-            return true;
-        else if(input.equals("NIE"))
-            return true;
-        else {
-            display.showErrorMessage();
-            return true;
+
+        while (true) {
+            String reply = getInput();
+            if (reply.equalsIgnoreCase("TAK"))
+                return true;
+            else if (reply.equalsIgnoreCase("NIE"))
+                return false;
+            else {
+                display.showErrorMessage();
+            }
         }
     }
-
     public boolean verifyIsNumber(String input){
         //do sprawdzenia tego, co poda uzytkownik przy wyborze rodzica
         //mozna tu dodac displaya - jezli cos jest zle, to wysiwtl komunikat

@@ -1,8 +1,10 @@
 package core;
 
-import core.human.*;
-import core.operation.*;
-
+import core.human.Parent;
+import core.human.Student;
+import core.human.Teacher;
+import core.operation.Display;
+import core.operation.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +18,49 @@ public class School {
     Input input = new Input();
 
     public void mainMethod() {
-
+        addAllTeachers();
         addAllParents();
         addStudent(parentList);
     }
 
     private void addTeacher() {
+        display.showFirstnameMessage();
+        String firstName = input.getInput();
+        if (input.verifyIsEmpty(firstName)) {
+            display.showErrorEmptyMessage();
+        }
 
+        display.showLastnameMessage();
+        String lastName = input.getInput();
+        if (input.verifyIsEmpty(lastName)) {
+            display.showErrorEmptyMessage();
+        }
+        display.showSubjectMessage();
+        String subject = input.getInput();
+        if (input.verifyIsEmpty(subject)) {
+            display.showErrorEmptyMessage();
+        }
+        Teacher teacher = new Teacher(firstName, lastName, subject);
+        teacherList.add(teacher);
     }
+
+    private void addAllTeachers() {
+        boolean iterate = true;
+        display.showNewTeacher();
+        while (iterate) {
+            addTeacher();
+            display.showTeachersCounter(teacherList.size());
+            display.showNewTeacherMessage(); //"Czy chcesz wprowadzić kolejnego nauczyciela? (TAK/NIE) "
+            //weryfikuje tak czy nie
+
+            if (!input.verifyAnswer()) {   //! = not
+                iterate = false;
+            }
+        }
+        display.showTeacherlist(teacherList);
+    }
+
+
 
     private List<Student> addStudent(List<Parent> parents){
         List<Student> students = new ArrayList<>();
